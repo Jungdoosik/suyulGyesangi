@@ -40,7 +40,7 @@ function App() {
   };
   return (
     <div>
-      <h1>수율계산기</h1>
+      <h1>🖩수율계산기</h1>
       <div className="inputArea">
         <div className="inputSubArea">
           <h5>원물입력</h5>
