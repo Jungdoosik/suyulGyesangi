@@ -2,14 +2,14 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [wonmul1, setWonmul1] = useState(0);
-  const [bbasi1, setBbasi1] = useState(0);
+  const [wonmul1, setWonmul1] = useState("");
+  const [bbasi1, setBbasi1] = useState("");
   const [jakup1, setJakup1] = useState("");
   const [suyul1, setSuyul1] = useState("");
 
   const onchangeWonmul = (e) => {
     setWonmul1(e.target.value);
-    if (bbasi1 === 0) {
+    if (bbasi1 === 0 || bbasi1 === "" || bbasi1 === undefined) {
       return;
     }
     gyesan(e.target.value, bbasi1);
@@ -17,7 +17,7 @@ function App() {
 
   const onchangeBbasi = (e) => {
     setBbasi1(e.target.value);
-    if (wonmul1 === 0) {
+    if (wonmul1 === 0 || wonmul1 === "" || wonmul1 === undefined) {
       return;
     }
     gyesan(wonmul1, e.target.value);
