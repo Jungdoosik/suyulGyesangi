@@ -1,0 +1,16 @@
+.divArea {
+  display: flex;
+}
+
+.inputArea {
+  display: flex;
+  justify-content: space-around;
+}
+
+.inputSubArea {
+  width: 20%;
+}
+
+.textArea {
+  width: 100%;
+}
