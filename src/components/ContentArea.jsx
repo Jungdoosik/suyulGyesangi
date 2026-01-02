@@ -3,7 +3,7 @@ import "../components/ContentArea.css";
 import { SuyulDispatchContext } from "../contexts/suyulContext";
 
 const ContentArea = (props) => {
-  const allSuyulChange = useContext(SuyulDispatchContext);
+  const { allSuyulChange, onDelete } = useContext(SuyulDispatchContext);
   const [wonmul, setWonmul] = useState("");
   const [bbasi, setBbasi] = useState("");
   const [jakup, setJakup] = useState("");
@@ -11,20 +11,31 @@ const ContentArea = (props) => {
 
   const onchangeWonmul = (e) => {
     setWonmul(e.target.value);
+    console.log("target1 : " + e.target.value);
+    if (e.target.value === "") {
+      onDelete(props.num);
+    }
 
     if (bbasi === 0 || bbasi === "" || bbasi === undefined) {
       return;
     }
-    // onSuyulChange(e.target.value, bbasi);
+
     gyesan(e.target.value, bbasi);
   };
 
   const onchangeBbasi = (e) => {
     setBbasi(e.target.value);
+    console.log("target2 : " + e.target.value);
+    console.log(typeof e.target.value);
+    console.log(e.target.value === "");
+    if (e.target.value === "") {
+      console.log("true");
+      console.log("props.num : " + props.num);
+      onDelete(props.num);
+    }
     if (wonmul === 0 || wonmul === "" || wonmul === undefined) {
       return;
     }
-    // onSuyulChange(wonmul, e.target.value);
     gyesan(wonmul, e.target.value);
   };
 
@@ -34,34 +45,35 @@ const ContentArea = (props) => {
     if (won < bba) {
       setJakup("원물보다 빠시가 더 무겁습니다.");
       setSuyul("원물보다 빠시가 더 무겁습니다.");
+      onDelete(props.num);
       return;
     }
 
-    const jakupGyesan = (won * 100 - bba * 100) / 100;
+    const jakupGyesan = ((won * 100 - bba * 100) / 100).toFixed(2);
     setJakup(jakupGyesan);
 
     const suyulGyesan = Number(jakupGyesan) / won;
     setSuyul(suyulGyesan);
 
-    allSuyulChange(wonmul, jakupGyesan, suyulGyesan, props.num);
+    allSuyulChange(wonGap, jakupGyesan, suyulGyesan, props.num);
   };
 
   return (
-    <div>
+    <div className="content_body">
       <div className="inputArea">
         <div className="inputSubArea">
-          <h5>원물입력</h5>
+          <h5>원물</h5>
           <input
-            type="number"
+            type="text"
             value={wonmul}
             onChange={onchangeWonmul}
             className="textArea"
           ></input>
         </div>
         <div className="inputSubArea">
-          <h5>빠시입력</h5>
+          <h5>빠시</h5>
           <input
-            type="number"
+            type="text"
             value={bbasi}
             onChange={onchangeBbasi}
             className="textArea"
@@ -70,16 +82,22 @@ const ContentArea = (props) => {
       </div>
       <div>
         <div className="divArea">
-          <h5>원물</h5>
-          <p>{wonmul}</p>
+          <div>원물 : </div>
+          <div>
+            <span>{wonmul}</span>
+          </div>
         </div>
         <div className="divArea">
-          <h5>작업</h5>
-          <p>{jakup}</p>
+          <div>작업 : </div>
+          <div>
+            <span>{jakup}</span>
+          </div>
         </div>
         <div className="divArea">
-          <h5>수율</h5>
-          <p>{suyul}</p>
+          <div>수율 : </div>
+          <div>
+            <span>{suyul}</span>
+          </div>
         </div>
       </div>
     </div>

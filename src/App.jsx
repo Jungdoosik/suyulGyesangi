@@ -5,6 +5,7 @@ import {
   SuyulStateContext,
   SuyulDispatchContext,
 } from "./contexts/suyulContext";
+import Footer from "./components/Footer";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -14,6 +15,11 @@ function reducer(state, action) {
             index === action.data.num ? action.data : item
           )
         : [...state, action.data];
+    case "DELETE":
+      // console.log("들어옴");
+      // console.log("들어옴 : " + action.num);
+      // console.log(state);
+      return state.filter((item) => Number(item.num) !== Number(action.num));
   }
 }
 
@@ -21,7 +27,7 @@ function App() {
   const [suyuls, dispatch] = useReducer(reducer, []);
 
   const allSuyulChange = (won, jak, su, num) => {
-    // console.log(num);
+    console.log(num);
     dispatch({
       type: "CHANGE",
       data: {
@@ -33,23 +39,35 @@ function App() {
     });
   };
 
+  const onDelete = (num) => {
+    dispatch({
+      type: "DELETE",
+      num: num,
+    });
+
+    // setTodos(todos.filter((todo) => todo.id !== targetId));
+  };
+
   useEffect(() => {
     console.log(suyuls);
   }, [suyuls]);
 
   return (
     <div>
-      <h1>🖩수율계산기</h1>
+      <h2>📱수율계산기</h2>
 
-      <div className="contentArea">
-        <SuyulStateContext.Provider value={suyuls}>
-          <SuyulDispatchContext.Provider value={allSuyulChange}>
+      <SuyulStateContext.Provider value={suyuls}>
+        <SuyulDispatchContext.Provider value={{ allSuyulChange, onDelete }}>
+          <div className="contentArea">
             <ContentArea num={0} />
             <ContentArea num={1} />
             <ContentArea num={2} />
-          </SuyulDispatchContext.Provider>
-        </SuyulStateContext.Provider>
-      </div>
+          </div>
+          <div className="contentArea">
+            <Footer />
+          </div>
+        </SuyulDispatchContext.Provider>
+      </SuyulStateContext.Provider>
     </div>
   );
 }

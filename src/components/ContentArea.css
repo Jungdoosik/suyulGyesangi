@@ -1,5 +1,11 @@
+.content_body {
+  width: 25%;
+}
 .divArea {
   display: flex;
+  height: 30px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .inputArea {
@@ -13,4 +19,7 @@
 
 .textArea {
   width: 100%;
+}
+
+.div_font {
 }
