@@ -11,7 +11,6 @@ const ContentArea = (props) => {
 
   const onchangeWonmul = (e) => {
     setWonmul(e.target.value);
-    console.log("target1 : " + e.target.value);
     if (e.target.value === "") {
       onDelete(props.num);
     }
@@ -25,12 +24,7 @@ const ContentArea = (props) => {
 
   const onchangeBbasi = (e) => {
     setBbasi(e.target.value);
-    console.log("target2 : " + e.target.value);
-    console.log(typeof e.target.value);
-    console.log(e.target.value === "");
     if (e.target.value === "") {
-      console.log("true");
-      console.log("props.num : " + props.num);
       onDelete(props.num);
     }
     if (wonmul === 0 || wonmul === "" || wonmul === undefined) {
@@ -40,8 +34,8 @@ const ContentArea = (props) => {
   };
 
   const gyesan = (wonGap, bbaGap) => {
-    const won = Number(wonGap);
-    const bba = Number(bbaGap);
+    let won = Number(wonGap);
+    let bba = Number(bbaGap);
     if (won < bba) {
       setJakup("원물보다 빠시가 더 무겁습니다.");
       setSuyul("원물보다 빠시가 더 무겁습니다.");
@@ -49,13 +43,18 @@ const ContentArea = (props) => {
       return;
     }
 
-    const jakupGyesan = ((won * 100 - bba * 100) / 100).toFixed(2);
-    setJakup(jakupGyesan);
+    if (won === 0 || won === "" || bba === 0 || bba === "") {
+      setJakup("");
+      setSuyul("");
+    } else {
+      const jakupGyesan = ((won * 100 - bba * 100) / 100).toFixed(2);
+      setJakup(jakupGyesan);
 
-    const suyulGyesan = Number(jakupGyesan) / won;
-    setSuyul(suyulGyesan);
+      const suyulGyesan = Number(jakupGyesan) / Number(won);
+      setSuyul(suyulGyesan);
 
-    allSuyulChange(wonGap, jakupGyesan, suyulGyesan, props.num);
+      allSuyulChange(wonGap, jakupGyesan, suyulGyesan, props.num);
+    }
   };
 
   return (

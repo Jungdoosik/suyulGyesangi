@@ -4,7 +4,7 @@ import { SuyulStateContext } from "../contexts/suyulContext";
 const Footer = () => {
   const allSuyul = useContext(SuyulStateContext);
   return (
-    <div>
+    <div className="content_body">
       <div>
         <div className="divArea">
           <div>총 원물 : </div>

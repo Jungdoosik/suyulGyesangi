@@ -61,9 +61,9 @@ function App() {
           <div className="contentArea">
             <ContentArea num={0} />
             <ContentArea num={1} />
-            <ContentArea num={2} />
           </div>
           <div className="contentArea">
+            <ContentArea num={2} />
             <Footer />
           </div>
         </SuyulDispatchContext.Provider>
