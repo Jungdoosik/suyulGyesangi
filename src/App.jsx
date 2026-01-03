@@ -54,17 +54,14 @@ function App() {
 
   return (
     <div>
-      <h2>📱수율계산기</h2>
-
       <SuyulStateContext.Provider value={suyuls}>
         <SuyulDispatchContext.Provider value={{ allSuyulChange, onDelete }}>
           <div className="contentArea">
+            <Footer />
+            <h2>📱수율계산기</h2>
             <ContentArea num={0} />
             <ContentArea num={1} />
-          </div>
-          <div className="contentArea">
             <ContentArea num={2} />
-            <Footer />
           </div>
         </SuyulDispatchContext.Provider>
       </SuyulStateContext.Provider>
