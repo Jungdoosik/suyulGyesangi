@@ -9,25 +9,44 @@ const ContentArea = (props) => {
   const [jakup, setJakup] = useState("");
   const [suyul, setSuyul] = useState("");
 
+  const regCheck = (text) => {
+    let reg = text.replace(/[^0-9.]/g, "");
+
+    console.log(reg);
+
+    const parts = reg.split(".");
+    if (parts.length > 2) {
+      reg = parts[0] + "." + parts.slice(1).join("");
+    }
+
+    return reg;
+  };
+
   const onchangeWonmul = (e) => {
-    setWonmul(e.target.value);
+    let reg = regCheck(e.target.value);
+    setWonmul(reg);
+
     if (e.target.value === "") {
       onDelete(props.num);
     }
 
     if (bbasi === 0 || bbasi === "" || bbasi === undefined) {
+      setJakup("");
+      setSuyul("");
       return;
     }
-
     gyesan(e.target.value, bbasi);
   };
 
   const onchangeBbasi = (e) => {
-    setBbasi(e.target.value);
+    let reg = regCheck(e.target.value);
+    setBbasi(reg);
     if (e.target.value === "") {
       onDelete(props.num);
     }
     if (wonmul === 0 || wonmul === "" || wonmul === undefined) {
+      setJakup("");
+      setSuyul("");
       return;
     }
     gyesan(wonmul, e.target.value);
@@ -36,22 +55,23 @@ const ContentArea = (props) => {
   const gyesan = (wonGap, bbaGap) => {
     let won = Number(wonGap);
     let bba = Number(bbaGap);
+
     if (won < bba) {
       setJakup("원물보다 빠시가 더 무겁습니다.");
       setSuyul("원물보다 빠시가 더 무겁습니다.");
       onDelete(props.num);
       return;
-    }
-
-    if (won === 0 || won === "" || bba === 0 || bba === "") {
-      setJakup("");
-      setSuyul("");
     } else {
       const jakupGyesan = ((won * 100 - bba * 100) / 100).toFixed(2);
-      setJakup(jakupGyesan);
 
       const suyulGyesan = Number(jakupGyesan) / Number(won);
-      setSuyul(suyulGyesan);
+
+      if (Number.isNaN(jakupGyesan) || Number.isNaN(suyulGyesan)) {
+        return;
+      } else {
+        setJakup(jakupGyesan);
+        setSuyul(suyulGyesan);
+      }
 
       allSuyulChange(wonGap, jakupGyesan, suyulGyesan, props.num);
     }
@@ -65,6 +85,7 @@ const ContentArea = (props) => {
           <input
             type="text"
             value={wonmul}
+            inputMode="decimal"
             onChange={onchangeWonmul}
             className="textArea"
           ></input>
@@ -74,6 +95,7 @@ const ContentArea = (props) => {
           <input
             type="text"
             value={bbasi}
+            inputMode="decimal"
             onChange={onchangeBbasi}
             className="textArea"
           ></input>

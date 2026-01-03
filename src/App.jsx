@@ -27,7 +27,6 @@ function App() {
   const [suyuls, dispatch] = useReducer(reducer, []);
 
   const allSuyulChange = (won, jak, su, num) => {
-    console.log(num);
     dispatch({
       type: "CHANGE",
       data: {
@@ -49,7 +48,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(suyuls);
+    // console.log(suyuls);
   }, [suyuls]);
 
   return (
