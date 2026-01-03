@@ -12,8 +12,6 @@ const ContentArea = (props) => {
   const regCheck = (text) => {
     let reg = text.replace(/[^0-9.]/g, "");
 
-    console.log(reg);
-
     const parts = reg.split(".");
     if (parts.length > 2) {
       reg = parts[0] + "." + parts.slice(1).join("");

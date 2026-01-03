@@ -57,7 +57,7 @@ function App() {
         <SuyulDispatchContext.Provider value={{ allSuyulChange, onDelete }}>
           <div className="contentArea">
             <Footer />
-            <h2>📱수율계산기</h2>
+            <h2>🐮수율계산기</h2>
             <ContentArea num={0} />
             <ContentArea num={1} />
             <ContentArea num={2} />
