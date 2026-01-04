@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { SuyulStateContext } from "../contexts/suyulContext";
 
-const Footer = () => {
+const Header = () => {
   const allSuyul = useContext(SuyulStateContext);
   return (
     <div className="">
@@ -11,7 +11,7 @@ const Footer = () => {
           <div>
             <span>
               {allSuyul.reduce(
-                (sum, item) => Number(sum) + Number(item.wonmul),
+                (sum, item) => (Number(sum) + Number(item.wonmul)).toFixed(2),
                 0
               )}
             </span>
@@ -21,7 +21,7 @@ const Footer = () => {
           <div>총 작업 : </div>
           <div>
             {allSuyul.reduce(
-              (sum, item) => Number(sum) + Number(item.jakup),
+              (sum, item) => (Number(sum) + Number(item.jakup)).toFixed(2),
               0
             )}
           </div>
@@ -46,4 +46,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Header;

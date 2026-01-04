@@ -5,7 +5,7 @@ import {
   SuyulStateContext,
   SuyulDispatchContext,
 } from "./contexts/suyulContext";
-import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -16,9 +16,6 @@ function reducer(state, action) {
           )
         : [...state, action.data];
     case "DELETE":
-      // console.log("들어옴");
-      // console.log("들어옴 : " + action.num);
-      // console.log(state);
       return state.filter((item) => Number(item.num) !== Number(action.num));
   }
 }
@@ -56,7 +53,7 @@ function App() {
       <SuyulStateContext.Provider value={suyuls}>
         <SuyulDispatchContext.Provider value={{ allSuyulChange, onDelete }}>
           <div className="contentArea">
-            <Footer />
+            <Header />
             <h2>🐮수율계산기</h2>
             <ContentArea num={0} />
             <ContentArea num={1} />
