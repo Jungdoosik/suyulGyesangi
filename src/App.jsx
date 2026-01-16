@@ -57,7 +57,7 @@ function App() {
     console.count("addContentArea called");
     setNums(
       (prev) => {
-        const id = ref.current++;
+        const id = ref.current;
         ref.current += 1;
         return [...prev, id];
       }
