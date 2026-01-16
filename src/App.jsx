@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useState, useRef } from "react";
 import ContentArea from "./components/ContentArea";
 import "./App.css";
 import {
@@ -22,6 +22,8 @@ function reducer(state, action) {
 
 function App() {
   const [suyuls, dispatch] = useReducer(reducer, []);
+  const [nums, setNums] = useState([]);
+  const ref = useRef(3);
 
   const allSuyulChange = (won, jak, su, num) => {
     dispatch({
@@ -47,6 +49,21 @@ function App() {
   useEffect(() => {
     // console.log(suyuls);
   }, [suyuls]);
+  useEffect(() => {
+    console.log(nums);
+  }, [nums]);
+
+  const addContentArea = () => {
+    console.count("addContentArea called");
+    setNums(
+      (prev) => {
+        const id = ref.current++;
+        ref.current += 1;
+        return [...prev, id];
+      }
+      // [...prev, ref.current++]
+    );
+  };
 
   return (
     <div>
@@ -54,7 +71,11 @@ function App() {
         <SuyulDispatchContext.Provider value={{ allSuyulChange, onDelete }}>
           <div className="contentArea">
             <Header />
-            <h2>🐮수율계산기</h2>
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+              <h2>🐮수율계산기</h2>
+              <button>-</button>
+              <button onClick={addContentArea}>+</button>
+            </div>
             <ContentArea num={0} />
             <ContentArea num={1} />
             <ContentArea num={2} />
