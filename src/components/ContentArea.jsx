@@ -3,7 +3,8 @@ import "../components/ContentArea.css";
 import { SuyulDispatchContext } from "../contexts/suyulContext";
 
 const ContentArea = (props) => {
-  const { allSuyulChange, onDelete } = useContext(SuyulDispatchContext);
+  const { allSuyulChange, onDelete, deleteContentArea } =
+    useContext(SuyulDispatchContext);
   const [wonmul, setWonmul] = useState("");
   const [bbasi, setBbasi] = useState("");
   const [jakup, setJakup] = useState("");
@@ -75,49 +76,59 @@ const ContentArea = (props) => {
     }
   };
 
+  const deleteContent = () => {
+    onDelete(props.num);
+    deleteContentArea(props.num);
+  };
+
   return (
-    <div className="content_body">
-      <div className="inputArea">
-        <div className="inputSubArea">
-          <h5>원물</h5>
-          <input
-            type="text"
-            value={wonmul}
-            inputMode="decimal"
-            onChange={onchangeWonmul}
-            className="textArea"
-          ></input>
+    <div style={{ display: "flex" }}>
+      <div className="content_body">
+        <div className="inputArea">
+          <div className="inputSubArea">
+            <h5>원물</h5>
+            <input
+              type="text"
+              value={wonmul}
+              inputMode="decimal"
+              onChange={onchangeWonmul}
+              className="textArea"
+            ></input>
+          </div>
+          <div className="inputSubArea">
+            <h5>빠시</h5>
+            <input
+              type="text"
+              value={bbasi}
+              inputMode="decimal"
+              onChange={onchangeBbasi}
+              className="textArea"
+            ></input>
+          </div>
         </div>
-        <div className="inputSubArea">
-          <h5>빠시</h5>
-          <input
-            type="text"
-            value={bbasi}
-            inputMode="decimal"
-            onChange={onchangeBbasi}
-            className="textArea"
-          ></input>
+        <div>
+          <div className="divArea">
+            <div>원물 : </div>
+            <div>
+              <span>{wonmul}</span>
+            </div>
+          </div>
+          <div className="divArea">
+            <div>작업 : </div>
+            <div>
+              <span>{jakup}</span>
+            </div>
+          </div>
+          <div className="divArea">
+            <div>수율 : </div>
+            <div>
+              <span>{suyul}</span>
+            </div>
+          </div>
         </div>
       </div>
       <div>
-        <div className="divArea">
-          <div>원물 : </div>
-          <div>
-            <span>{wonmul}</span>
-          </div>
-        </div>
-        <div className="divArea">
-          <div>작업 : </div>
-          <div>
-            <span>{jakup}</span>
-          </div>
-        </div>
-        <div className="divArea">
-          <div>수율 : </div>
-          <div>
-            <span>{suyul}</span>
-          </div>
-        </div>
+        <button onClick={deleteContent}> - </button>
       </div>
     </div>
   );

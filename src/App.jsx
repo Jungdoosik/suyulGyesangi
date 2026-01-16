@@ -10,9 +10,13 @@ import Header from "./components/Header";
 function reducer(state, action) {
   switch (action.type) {
     case "CHANGE":
-      return state.some((item) => item.num === action.data.num)
-        ? state.map((item, index) =>
-            index === action.data.num ? action.data : item
+      console.log("들어옴");
+      console.log("state : ", state);
+      console.log("들어옴");
+
+      return state.some((item) => Number(item.num) === Number(action.data.num))
+        ? state.map((item) =>
+            Number(item.num) === Number(action.data.num) ? action.data : item
           )
         : [...state, action.data];
     case "DELETE":
@@ -23,9 +27,13 @@ function reducer(state, action) {
 function App() {
   const [suyuls, dispatch] = useReducer(reducer, []);
   const [nums, setNums] = useState([]);
-  const ref = useRef(3);
+  const ref = useRef(0);
 
   const allSuyulChange = (won, jak, su, num) => {
+    console.log(won);
+    console.log(jak);
+    console.log(su);
+    console.log(num);
     dispatch({
       type: "CHANGE",
       data: {
@@ -46,15 +54,20 @@ function App() {
     // setTodos(todos.filter((todo) => todo.id !== targetId));
   };
 
+  const deleteContentArea = (number) => {
+    setNums(() => {
+      return nums.filter((item) => Number(item) !== Number(number));
+    });
+  };
+
   useEffect(() => {
-    // console.log(suyuls);
+    console.log(suyuls);
   }, [suyuls]);
   useEffect(() => {
     console.log(nums);
   }, [nums]);
 
   const addContentArea = () => {
-    console.count("addContentArea called");
     setNums(
       (prev) => {
         const id = ref.current;
@@ -68,17 +81,30 @@ function App() {
   return (
     <div>
       <SuyulStateContext.Provider value={suyuls}>
-        <SuyulDispatchContext.Provider value={{ allSuyulChange, onDelete }}>
+        <SuyulDispatchContext.Provider
+          value={{ allSuyulChange, onDelete, deleteContentArea }}
+        >
           <div className="contentArea">
             <Header />
-            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-              <h2>🐮수율계산기</h2>
-              <button>-</button>
-              <button onClick={addContentArea}>+</button>
+            <div className="titleArea">
+              <h2 style={{ marginRight: "10px" }}>🐮수율계산기</h2>
+              <div
+                style={{
+                  position: "relative",
+                }}
+              >
+                <button className="plus-button" onClick={addContentArea}>
+                  +
+                </button>
+              </div>
             </div>
-            <ContentArea num={0} />
-            <ContentArea num={1} />
-            <ContentArea num={2} />
+            {nums.map((i) => {
+              return (
+                <div style={{ display: "flex" }} key={i}>
+                  <ContentArea num={i} />
+                </div>
+              );
+            })}
           </div>
         </SuyulDispatchContext.Provider>
       </SuyulStateContext.Provider>
