@@ -27,8 +27,6 @@ const Header = () => {
             )}
           </div>
         </div>
-      </div>
-      <div>
         <div className="header_divArea">
           <div>평균 수율 : </div>
           <div>
