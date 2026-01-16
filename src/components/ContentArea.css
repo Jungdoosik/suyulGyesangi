@@ -1,7 +1,7 @@
 .content_body {
-  margin-right: 20px;
   border: 1px solid grey;
   padding: 5px 5px;
+  border-radius: 10px;
 }
 .divArea {
   display: flex;
