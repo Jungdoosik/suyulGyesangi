@@ -29,11 +29,7 @@ function App() {
   const [nums, setNums] = useState([]);
   const ref = useRef(0);
 
-  const allSuyulChange = (won, jak, su, num) => {
-    console.log(won);
-    console.log(jak);
-    console.log(su);
-    console.log(num);
+  const allSuyulChange = (won, jak, su, num, bba) => {
     dispatch({
       type: "CHANGE",
       data: {
@@ -41,6 +37,7 @@ function App() {
         wonmul: won,
         jakup: jak,
         suyul: su,
+        bbasi: bba,
       },
     });
   };
@@ -93,7 +90,11 @@ function App() {
                   position: "relative",
                 }}
               >
-                <button className="plus-button" onClick={addContentArea}>
+                <button
+                  className="plus-button"
+                  style={{ position: "absolute", width: "40px", top: "25%" }}
+                  onClick={addContentArea}
+                >
                   +
                 </button>
               </div>

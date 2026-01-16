@@ -1,0 +1,15 @@
+.header_section {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: white;
+  display: flex;
+}
+
+.header_divArea {
+  display: flex;
+  height: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+}

@@ -72,7 +72,7 @@ const ContentArea = (props) => {
         setSuyul(suyulGyesan);
       }
 
-      allSuyulChange(wonGap, jakupGyesan, suyulGyesan, props.num);
+      allSuyulChange(wonGap, jakupGyesan, suyulGyesan, props.num, bba);
     }
   };
 
